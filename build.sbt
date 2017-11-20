@@ -2,7 +2,7 @@ name := """silhouette-macwire"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala).configs(IntegrationTest)
+lazy val root = (project in file(".")).enablePlugins(PlayScala).disablePlugins(PlayLayoutPlugin).configs(IntegrationTest)
 
 Defaults.itSettings
 
