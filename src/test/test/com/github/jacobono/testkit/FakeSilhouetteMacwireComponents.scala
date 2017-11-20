@@ -1,4 +1,4 @@
-package com.github.jacobono.testkit
+package testkit
 
 import controllers.{ Assets, WebJarAssets }
 
@@ -14,7 +14,7 @@ import play.filters.headers.SecurityHeadersComponents
 import router.Routes
 
 import com.softwaremill.macwire._
-import com.github.jacobono.modules._
+import modules._
 
 class FakeSilhouetteMacwireComponents(context: Context) extends BuiltInComponentsFromContext(context)
     with ControllerModule with UtilModule with UserModule with SilhouetteModule with DAOModule with DatabaseModule

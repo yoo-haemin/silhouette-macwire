@@ -1,8 +1,8 @@
-package com.github.jacobono.modules
+package modules
 
 import com.softwaremill.macwire._
-import com.github.jacobono.models.services.UserServiceImpl
-import com.github.jacobono.models.daos.UserDAO
+import models.services.UserServiceImpl
+import models.daos.UserDAO
 
 trait UserModule {
   def userDAO: UserDAO

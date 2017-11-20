@@ -1,11 +1,11 @@
-package com.github.jacobono.controllers
+package controllers
 
 import com.mohiva.play.silhouette.api.Environment
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import java.util.UUID
 import play.api.test.{ FakeRequest, PlaySpecification }
-import com.github.jacobono.models.User
+import models.User
 import play.api.libs.concurrent.Execution.Implicits._
 
 class ApplicationSpec extends PlaySpecification {
@@ -16,7 +16,7 @@ class ApplicationSpec extends PlaySpecification {
       status(redirectResult) must be equalTo SEE_OTHER
 
       val redirectURL = redirectLocation(redirectResult).getOrElse("")
-      redirectURL must contain(com.github.jacobono.controllers.routes.Application.signIn().toString())
+      redirectURL must contain(controllers.routes.Application.signIn().toString())
 
       val Some(unauthorizedResult) = route(FakeRequest(GET, redirectURL))
 

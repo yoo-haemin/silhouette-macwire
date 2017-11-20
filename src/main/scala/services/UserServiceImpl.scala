@@ -1,11 +1,11 @@
-package com.github.jacobono.models.services
+package models.services
 
 import java.util.UUID
 
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.impl.providers.CommonSocialProfile
-import com.github.jacobono.models.User
-import com.github.jacobono.models.daos.UserDAO
+import models.User
+import models.daos.UserDAO
 import play.api.libs.concurrent.Execution.Implicits._
 
 import scala.concurrent.Future

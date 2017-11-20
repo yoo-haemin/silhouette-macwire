@@ -1,8 +1,8 @@
-package com.github.jacobono.models.services
+package models.services
 
 import com.mohiva.play.silhouette.api.services.IdentityService
 import com.mohiva.play.silhouette.impl.providers.CommonSocialProfile
-import com.github.jacobono.models.User
+import models.User
 
 import scala.concurrent.Future
 

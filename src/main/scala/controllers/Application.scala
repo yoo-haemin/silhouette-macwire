@@ -1,15 +1,17 @@
-package com.github.jacobono.controllers
+package controllers
 
 import play.api._
+import play.api.mvc.{ ControllerComponents, AbstractController }
 import play.api.i18n.MessagesApi
 
-import com.mohiva.play.silhouette.api.{ Environment, LogoutEvent }
-import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
+import com.mohiva.play.silhouette.api.{ Environment, LogoutEvent, Silhouette }
+import com.mohiva.play.silhouette.api.actions.{ SecuredAction, UserAwareAction }
 import com.mohiva.play.silhouette.impl.providers.SocialProviderRegistry
 
-import com.github.jacobono.forms._
-import com.github.jacobono.models.User
-import com.github.jacobono.utils.CSRFHelper
+import forms._
+import models.User
+import modules.SilhouetteModule.DefaultEnv
+import utils.CSRFHelper
 
 import scala.concurrent.Future
 
@@ -20,20 +22,22 @@ import scala.concurrent.Future
  * @param env The Silhouette environment.
  * @param socialProviderRegistry The social provider registry.
  */
-class Application(
+class Application(cc: ControllerComponents)(
     val messagesApi: MessagesApi,
-    val env: Environment[User, CookieAuthenticator],
+    silhouette: Silhouette[DefaultEnv],
     socialProviderRegistry: SocialProviderRegistry,
     csrfHelper: CSRFHelper
-) extends CookieAuthentication {
+) extends AbstractController(cc) with CookieAuthentication {
 
   /**
    * Handles the index action.
    *
    * @return The result to display.
    */
-  def index = SecuredAction.async { implicit request =>
-    Future.successful(Ok(com.github.jacobono.views.html.home(request.identity)))
+  def index = Action.async { implicit request =>
+    silhouette.SecuredRequestHandler { securedRequest =>
+      Future.successful(Ok(securedRequest.identity.toString))
+    }
   }
 
   /**
@@ -44,7 +48,7 @@ class Application(
   def signIn = UserAwareAction.async { implicit request =>
     request.identity match {
       case Some(user) => Future.successful(Redirect(routes.Application.index()))
-      case None => Future.successful(Ok(com.github.jacobono.views.html.signIn(SignInForm.form, socialProviderRegistry, csrfHelper)))
+      case None => Future.successful(Ok(views.html.signIn(SignInForm.form, socialProviderRegistry, csrfHelper)))
     }
   }
 
@@ -56,7 +60,7 @@ class Application(
   def signUp = UserAwareAction.async { implicit request =>
     request.identity match {
       case Some(user) => Future.successful(Redirect(routes.Application.index()))
-      case None => Future.successful(Ok(com.github.jacobono.views.html.signUp(SignUpForm.form, csrfHelper)))
+      case None => Future.successful(Ok(views.html.signUp(SignUpForm.form, csrfHelper)))
     }
   }
 
@@ -67,8 +71,8 @@ class Application(
    */
   def signOut = SecuredAction.async { implicit request =>
     val result = Redirect(routes.Application.index())
-    env.eventBus.publish(LogoutEvent(request.identity, request, request2Messages))
+    silhouette.env.eventBus.publish(LogoutEvent(request.identity, request, request2Messages))
 
-    env.authenticatorService.discard(request.authenticator, result)
+    silhouette.env.authenticatorService.discard(request.authenticator, result)
   }
 }

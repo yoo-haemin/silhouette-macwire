@@ -1,6 +1,6 @@
-package com.github.jacobono.models.daos
+package models.daos
 
-import com.github.jacobono.database.Tables
+import database.Tables
 import slick.driver.JdbcProfile
 import play.api.db.slick.HasDatabaseConfigProvider
 

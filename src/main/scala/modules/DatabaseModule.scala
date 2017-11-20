@@ -1,4 +1,4 @@
-package com.github.jacobono.modules
+package modules
 
 import play.api.db.slick.{ DatabaseConfigProvider, DbName, SlickApi }
 import slick.backend.DatabaseConfig

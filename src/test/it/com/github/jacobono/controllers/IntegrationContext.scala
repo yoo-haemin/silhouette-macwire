@@ -1,7 +1,7 @@
-package com.github.jacobono.controllers
+package controllers
 
 import play.api.test.WithApplicationLoader
-import com.github.jacobono.SilhouetteMacwireApplicationLoader
+import SilhouetteMacwireApplicationLoader
 
 class IntegrationContext extends WithApplicationLoader(
   applicationLoader = new SilhouetteMacwireApplicationLoader

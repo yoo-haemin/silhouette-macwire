@@ -1,8 +1,8 @@
-package com.github.jacobono.models.daos
+package models.daos
 
 import java.util.UUID
 import com.mohiva.play.silhouette.api.LoginInfo
-import com.github.jacobono.models.User
+import models.User
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import slick.dbio.DBIOAction
 import play.api.db.slick.DatabaseConfigProvider

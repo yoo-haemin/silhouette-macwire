@@ -1,5 +1,6 @@
-package com.github.jacobono.modules
+package modules
 
+import com.mohiva.play.silhouette.api.Env
 import com.mohiva.play.silhouette.api.repositories.AuthInfoRepository
 import com.mohiva.play.silhouette.api.services._
 import com.mohiva.play.silhouette.api.util._
@@ -30,9 +31,9 @@ import play.api.libs.concurrent.Execution.Implicits._
 import play.api.libs.openid.OpenIdClient
 import play.api.libs.ws.WSClient
 
-import com.github.jacobono.models.daos._
-import com.github.jacobono.models.User
-import com.github.jacobono.models.services.UserService
+import models.daos._
+import models.User
+import models.services.UserService
 
 trait SilhouetteModule {
   def configuration: Configuration
@@ -208,5 +209,12 @@ trait SilhouetteModule {
     ): CredentialsProvider = {
       new CredentialsProvider(authInfoRepository, passwordHasher, Seq(passwordHasher))
     }
+  }
+}
+
+object SilhouetteModule {
+  trait DefaultEnv extends Env {
+    type I = User
+    type A = CookieAuthenticator
   }
 }

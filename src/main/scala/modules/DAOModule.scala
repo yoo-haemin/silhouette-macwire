@@ -1,9 +1,9 @@
-package com.github.jacobono.modules
+package modules
 
 import com.softwaremill.macwire._
 import play.api.db.slick.DatabaseConfigProvider
 
-import com.github.jacobono.models.daos._
+import models.daos._
 
 trait DAOModule {
   def dbConfigProvider: DatabaseConfigProvider

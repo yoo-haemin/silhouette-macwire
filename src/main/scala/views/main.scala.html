@@ -1,4 +1,4 @@
-@(title: String, user: Option[com.github.jacobono.models.User] = None)(content: Html)(implicit messages: Messages)
+@(title: String, user: Option[models.User] = None)(content: Html)(implicit messages: Messages)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,20 +29,20 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@com.github.jacobono.controllers.routes.Application.index">Silhouette Seed Template</a>
+            <a class="navbar-brand" href="@controllers.routes.Application.index">Silhouette Seed Template</a>
           </div>
           <nav class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="@com.github.jacobono.controllers.routes.Application.index">@Messages("home")</a></li>
+              <li><a href="@controllers.routes.Application.index">@Messages("home")</a></li>
               <li><a href="https://github.com/mohiva/play-silhouette-seed">GitHub</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               @user.map { u =>
-                      <li><a href="@com.github.jacobono.controllers.routes.Application.index">@u.fullName</a></li>
-                      <li><a href="@com.github.jacobono.controllers.routes.Application.signOut">@Messages("sign.out")</a></li>
+                      <li><a href="@controllers.routes.Application.index">@u.fullName</a></li>
+                      <li><a href="@controllers.routes.Application.signOut">@Messages("sign.out")</a></li>
               }.getOrElse {
-                <li><a href="@com.github.jacobono.controllers.routes.Application.signIn">@Messages("sign.in")</a></li>
-                <li><a href="@com.github.jacobono.controllers.routes.Application.signUp">@Messages("sign.up")</a></li>
+                <li><a href="@controllers.routes.Application.signIn">@Messages("sign.in")</a></li>
+                <li><a href="@controllers.routes.Application.signUp">@Messages("sign.up")</a></li>
               }
             </ul>
           </nav>

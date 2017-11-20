@@ -1,8 +1,8 @@
-package com.github.jacobono.utils
+package utils
 
-import com.mohiva.play.silhouette.api.SecuredErrorHandler
+import com.mohiva.play.silhouette.api.actions.SecuredErrorHandler
 import play.api.http.DefaultHttpErrorHandler
-import play.api.http.HttpErrorHandler
+//import play.api.http.HttpErrorHandler
 import play.api.i18n.Messages
 import play.api.mvc.Results._
 import play.api.mvc.{ Result, RequestHeader }
@@ -17,7 +17,8 @@ import scala.concurrent.Future
  */
 class ErrorHandler(
     env: play.api.Environment, config: Configuration,
-    sourceMapper: Option[SourceMapper], router: Option[Router]
+    sourceMapper: Option[SourceMapper], router: Option[Router],
+    routes: modules.Routes
 ) extends DefaultHttpErrorHandler(env, config, sourceMapper, router) with SecuredErrorHandler {
 
   /**
@@ -30,7 +31,11 @@ class ErrorHandler(
    * @return The result to send to the client.
    */
   override def onNotAuthenticated(request: RequestHeader, messages: Messages): Option[Future[Result]] = {
-    Some(Future.successful(Redirect(com.github.jacobono.controllers.routes.Application.signIn())))
+    router.map { route =>
+      Future.successful(
+        Redirect()
+      )
+    }
   }
 
   /**
@@ -43,6 +48,6 @@ class ErrorHandler(
    * @return The result to send to the client.
    */
   override def onNotAuthorized(request: RequestHeader, messages: Messages): Option[Future[Result]] = {
-    Some(Future.successful(Redirect(com.github.jacobono.controllers.routes.Application.signIn()).flashing("error" -> Messages("access.denied")(messages))))
+    Some(Future.successful(Redirect(controllers.routes.Application.signIn()).flashing("error" -> Messages("access.denied")(messages))))
   }
 }

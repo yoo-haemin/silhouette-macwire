@@ -1,4 +1,4 @@
-package com.github.jacobono.modules
+package modules
 
 import play.api.{ Configuration, Environment }
 import play.api.http.HttpErrorHandler
@@ -9,7 +9,7 @@ import play.filters.headers.SecurityHeadersFilter
 
 import com.softwaremill.macwire._
 
-import com.github.jacobono.utils._
+import utils._
 
 trait UtilModule {
   def environment: Environment

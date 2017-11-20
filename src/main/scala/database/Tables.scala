@@ -1,4 +1,4 @@
-package com.github.jacobono.database
+package database
 
 import slick.driver.JdbcProfile
 import com.mohiva.play.silhouette.api.LoginInfo

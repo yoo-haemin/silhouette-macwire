@@ -1,4 +1,4 @@
-package com.github.jacobono.models
+package models
 
 import java.util.UUID
 

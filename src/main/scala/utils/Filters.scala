@@ -1,4 +1,4 @@
-package com.github.jacobono.utils
+package utils
 
 import play.api.http.HttpFilters
 import play.api.mvc.EssentialFilter

@@ -1,6 +1,6 @@
-package com.github.jacobono.testkit
+package testkit
 
-import com.github.jacobono.models.User
+import models.User
 import com.mohiva.play.silhouette.api.Environment
 import com.mohiva.play.silhouette.api.LoginInfo
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator

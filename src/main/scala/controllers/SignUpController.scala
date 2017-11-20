@@ -1,4 +1,4 @@
-package com.github.jacobono.controllers
+package controllers
 
 import java.util.UUID
 
@@ -8,10 +8,10 @@ import com.mohiva.play.silhouette.api.services.AvatarService
 import com.mohiva.play.silhouette.api.util.PasswordHasher
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import com.mohiva.play.silhouette.impl.providers._
-import com.github.jacobono.forms.SignUpForm
-import com.github.jacobono.models.User
-import com.github.jacobono.models.services.UserService
-import com.github.jacobono.utils.CSRFHelper
+import forms.SignUpForm
+import models.User
+import models.services.UserService
+import utils.CSRFHelper
 import play.api.i18n.{ MessagesApi, Messages }
 import play.api.libs.concurrent.Execution.Implicits._
 import play.api.mvc.Action
@@ -45,7 +45,7 @@ class SignUpController(
    */
   def signUp = Action.async { implicit request =>
     SignUpForm.form.bindFromRequest.fold(
-      form => Future.successful(BadRequest(com.github.jacobono.views.html.signUp(form, csrfHelper))),
+      form => Future.successful(BadRequest(views.html.signUp(form, csrfHelper))),
       data => {
         val loginInfo = LoginInfo(CredentialsProvider.ID, data.email)
         userService.retrieve(loginInfo).flatMap {

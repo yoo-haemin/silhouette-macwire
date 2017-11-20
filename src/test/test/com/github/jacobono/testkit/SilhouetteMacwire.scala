@@ -1,4 +1,4 @@
-package com.github.jacobono.testkit
+package testkit
 
 import play.api.Application
 import play.api.ApplicationLoader

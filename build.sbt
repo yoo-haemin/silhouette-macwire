@@ -9,27 +9,36 @@ Defaults.itSettings
 import com.typesafe.sbt.SbtScalariform._
 scalariformSettingsWithIt
 
-scalaVersion := "2.11.7"
+scalaVersion in ThisBuild := "2.12.4"
 
 libraryDependencies ++= Seq(
   jdbc,
   filters,
-  cache,
+  ehcache,
   ws,
   specs2 % Test,
   specs2 % IntegrationTest,
-  "com.h2database" % "h2" % "1.4.191",
-  "org.flywaydb" %% "flyway-play" % "3.0.0",
-  "com.typesafe.play" %% "play-slick" % "1.1.1",
-  "com.softwaremill.macwire" %% "macros" % "2.2.1",
-  "com.mohiva" %% "play-silhouette" % "3.0.2",
-  "com.mohiva" %% "play-silhouette-testkit" % "3.0.2" % "test",
-  "net.ceedubs" %% "ficus" % "1.1.2",
-  "org.webjars" %% "webjars-play" % "2.4.0-1",
-  "com.adrianhurt" %% "play-bootstrap3" % "0.4.4-P24"
+  //"com.h2database" % "h2" % "1.4.191",
+  //"io.getquill" %% "quill-jdbc" % "2.2.0",
+  "io.getquill" %% "quill-async-mysql" % "2.2.0",
+  "mysql" % "mysql-connector-java" % "8.0.8-dmr",// "5.1.36",
+  //"org.flywaydb" %% "flyway-play" % "4.0.0",
+  //"com.typesafe.play" %% "play-slick" % "3.0.0",
+  "com.softwaremill.macwire" %% "macros" % "2.3.0",
+  "com.mohiva" %% "play-silhouette" % "5.0.2",
+  "com.mohiva" %% "play-silhouette-persistence" % "5.0.2",
+  "com.mohiva" %% "play-silhouette-password-bcrypt" % "5.0.2",
+  "com.mohiva" %% "play-silhouette-testkit" % "5.0.2" % "test",
+  "com.iheart" %% "ficus" % "1.4.3",
+  "org.webjars" %% "webjars-play" % "2.6.1",
+  "com.adrianhurt" %% "play-bootstrap" % "1.2-P26-B3"
 )
 
-resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+resolvers ++= Seq(
+  Resolver.jcenterRepo,
+  "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
+  "Atlassian Releases" at "https://maven.atlassian.com/public/"
+)
 
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.

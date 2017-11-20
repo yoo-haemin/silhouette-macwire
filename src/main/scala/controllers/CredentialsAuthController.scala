@@ -1,4 +1,4 @@
-package com.github.jacobono.controllers
+package controllers
 
 import com.mohiva.play.silhouette.api.Authenticator.Implicits._
 import com.mohiva.play.silhouette.api._
@@ -8,10 +8,10 @@ import com.mohiva.play.silhouette.api.util.{ Clock, Credentials }
 import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
 import com.mohiva.play.silhouette.impl.exceptions.IdentityNotFoundException
 import com.mohiva.play.silhouette.impl.providers._
-import com.github.jacobono.forms.SignInForm
-import com.github.jacobono.models.User
-import com.github.jacobono.models.services.UserService
-import com.github.jacobono.utils.CSRFHelper
+import forms.SignInForm
+import models.User
+import models.services.UserService
+import utils.CSRFHelper
 import net.ceedubs.ficus.Ficus._
 import play.api.Configuration
 import play.api.i18n.{ Messages, MessagesApi }
@@ -52,7 +52,7 @@ class CredentialsAuthController(
    */
   def authenticate = Action.async { implicit request =>
     SignInForm.form.bindFromRequest.fold(
-      form => Future.successful(BadRequest(com.github.jacobono.views.html.signIn(form, socialProviderRegistry, csrfHelper))),
+      form => Future.successful(BadRequest(views.html.signIn(form, socialProviderRegistry, csrfHelper))),
       data => {
         val credentials = Credentials(data.email, data.password)
         credentialsProvider.authenticate(credentials).flatMap { loginInfo =>

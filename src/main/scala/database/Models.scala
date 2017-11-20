@@ -1,4 +1,4 @@
-package com.github.jacobono.database
+package database
 
 trait Models {
 

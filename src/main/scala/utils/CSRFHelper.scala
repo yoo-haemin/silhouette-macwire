@@ -1,4 +1,4 @@
-package com.github.jacobono.utils
+package utils
 
 import play.api.mvc._
 import play.filters.csrf.CSRF
@@ -11,8 +11,10 @@ import play.twirl.api.{ Html, HtmlFormat }
  */
 class CSRFHelper(csrfConfig: CSRFConfig) {
 
-  def token(request: RequestHeader): Token =
-    CSRF.getToken(request, csrfConfig) getOrElse sys.error("Missing CSRF Token")
+  def token(request: RequestHeader): Token = {
+    implicit val req = request
+    CSRF.getToken getOrElse sys.error("Missing CSRF Token") //(request, csrfConfig)
+  }
 
   /**
    * Add the CSRF token as a query String parameter to this reverse router request

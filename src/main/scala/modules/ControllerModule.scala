@@ -1,4 +1,4 @@
-package com.github.jacobono.modules
+package modules
 
 import com.mohiva.play.silhouette.api.Environment
 import com.mohiva.play.silhouette.api.repositories.AuthInfoRepository
@@ -13,10 +13,10 @@ import com.softwaremill.macwire._
 import play.api.Configuration
 import play.api.i18n.MessagesApi
 
-import com.github.jacobono.controllers._
-import com.github.jacobono.models.User
-import com.github.jacobono.models.services.UserService
-import com.github.jacobono.utils.CSRFHelper
+import controllers._
+import models.User
+import models.services.UserService
+import utils.CSRFHelper
 
 trait ControllerModule {
   def messagesApi: MessagesApi

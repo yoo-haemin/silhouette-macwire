@@ -1,4 +1,4 @@
-package com.github.jacobono.modules
+package modules
 
 import org.specs2.mock.Mockito
 import play.api.libs.ws.WSClient
