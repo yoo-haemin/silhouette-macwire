@@ -1,9 +1,8 @@
 import _root_.controllers.Assets
-//import _root_.controllers.WebJarAssets
 
 import com.softwaremill.macwire._
 
-import org.flywaydb.play.FlywayPlayComponents
+//import org.flywaydb.play.FlywayPlayComponents
 import org.webjars.play.WebJarAssets
 import play.api._
 import play.api.ApplicationLoader.Context
@@ -30,8 +29,7 @@ class AppComponents(context: Context) extends BuiltInComponentsFromContext(conte
     with ControllerModule with UtilModule with UserModule with SilhouetteModule
     with DAOModule with DatabaseModule
     with I18nComponents with AhcWSComponents with CSRFComponents with SecurityHeadersComponents
-    /* with SlickComponents */ with SyncCacheApi with OpenIDComponents with FlywayPlayComponents {
-  flywayPlayInitializer
+    /* with SlickComponents */ with SyncCacheApi with OpenIDComponents {
 
   // for the optional Router param in error handler
   // if this is trying to use the Router value from BuiltInComponentsFromContext

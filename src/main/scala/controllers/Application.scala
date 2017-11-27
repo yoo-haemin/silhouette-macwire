@@ -1,15 +1,15 @@
 package controllers
 
-import play.api._
+//import play.api._
 import play.api.mvc.{ ControllerComponents, AbstractController }
 import play.api.i18n.MessagesApi
 
-import com.mohiva.play.silhouette.api.{ Environment, LogoutEvent, Silhouette }
-import com.mohiva.play.silhouette.api.actions.{ SecuredAction, UserAwareAction }
+import com.mohiva.play.silhouette.api.{ LogoutEvent, Silhouette }
+//import com.mohiva.play.silhouette.api.actions.{ SecuredAction, UserAwareAction }
 import com.mohiva.play.silhouette.impl.providers.SocialProviderRegistry
 
 import forms._
-import models.User
+//import models.User
 import modules.SilhouetteModule.DefaultEnv
 import utils.CSRFHelper
 
@@ -27,18 +27,28 @@ class Application(cc: ControllerComponents)(
     silhouette: Silhouette[DefaultEnv],
     socialProviderRegistry: SocialProviderRegistry,
     csrfHelper: CSRFHelper
-) extends AbstractController(cc) with CookieAuthentication {
+) extends AbstractController(cc) {
+  import silhouette.{ SecuredAction, UserAwareAction }
 
   /**
    * Handles the index action.
    *
    * @return The result to display.
    */
-  def index = Action.async { implicit request =>
-    silhouette.SecuredRequestHandler { securedRequest =>
-      Future.successful(Ok(securedRequest.identity.toString))
-    }
+  def index = SecuredAction.async { implicit request =>
+    Future.successful(Ok("hi"))
   }
+
+  //Action.async { implicit request =>
+  //  silhouette.SecuredRequestHandler { securedRequest =>
+  //    silhouette.SecuredRequestHandler { securedRequest =>
+  //      Future.successful(HandlerResult(Ok, Some(securedRequest.identity)))
+  //    }.map {
+  //      case HandlerResult(r, Some(user)) => Ok(Json.toJson(user.loginInfo))
+  //      case HandlerResult(r, None) => Unauthorized
+  //    }
+  //  }
+  //}
 
   /**
    * Handles the Sign In action.

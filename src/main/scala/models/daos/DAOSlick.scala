@@ -1,10 +1,10 @@
 package models.daos
 
-import database.Tables
-import slick.driver.JdbcProfile
-import play.api.db.slick.HasDatabaseConfigProvider
+//import database.Tables
+//import slick.driver.JdbcProfile
+//import play.api.db.slick.HasDatabaseConfigProvider
 
 /**
  * Trait that contains generic slick db handling code to be mixed in with DAOs
  */
-trait DAOSlick extends Tables with HasDatabaseConfigProvider[JdbcProfile]
+//trait DAOSlick extends Tables with HasDatabaseConfigProvider[JdbcProfile]

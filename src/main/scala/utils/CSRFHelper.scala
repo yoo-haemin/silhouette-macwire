@@ -13,7 +13,7 @@ class CSRFHelper(csrfConfig: CSRFConfig) {
 
   def token(request: RequestHeader): Token = {
     implicit val req = request
-    CSRF.getToken getOrElse sys.error("Missing CSRF Token") //(request, csrfConfig)
+    CSRF.getToken getOrElse sys.error("Missing CSRF Token")
   }
 
   /**

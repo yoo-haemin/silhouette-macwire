@@ -1,9 +1,10 @@
 package modules
 
+import _root_.controllers.Assets
 import play.api.routing.Router
 import play.api.routing.sird._
 import org.webjars.play.WebJarAssets
-import scala.concurrent.Future
+//import scala.concurrent.Future
 import scala.language.dynamics
 
 class Routes(
@@ -11,20 +12,23 @@ class Routes(
     socialAuthController: controllers.SocialAuthController,
     credentialsAuthController: controllers.CredentialsAuthController,
     signUpController: controllers.SignUpController,
+    assets: Assets,
     webJarAssets: WebJarAssets
 ) {
 
-  // def baseMap = Map[(RequestMethodExtractor, String), Function0[Future[Result]]](
-  //   (GET -> "") -> application.index,
-  //   (GET -> "/signIn") -> application.signIn
-  // )
+  //TODO remove any from [(RequestMethodExtractor, String), Function0[Future[Any]]]
+  def baseMap = Map(
+    (GET -> "") -> application.index,
+    (GET -> "/signIn") -> application.signIn
+  )
 
-  //def router = Router.from {
-  //  baseMap.map {
-  //    case ((method, path), fun) =>
-  //      ???
-  //  }
-  //}
+  def router = Router.from {
+    baseMap.map {
+      case ((method, path), fun) => ???
+    }
+  }
+
+  val a = StringContext("/").p
 
   def apply() = Router.from {
     // Home page
@@ -37,7 +41,7 @@ class Routes(
     case POST(p"/signUp") => signUpController.signUp
 
     // Map static resources from the /public folder to the /assets URL path
-    case GET(p"/assets/$file") => controllers.Assets.at(path = "/public", file)
+    case GET(p"/assets/$file") => assets.at(path = "/public", file)
     case GET(p"/webjars/$file") => webJarAssets.at(file)
   }
 

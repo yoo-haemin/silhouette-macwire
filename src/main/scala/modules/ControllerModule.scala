@@ -16,11 +16,12 @@ import play.api.i18n.MessagesApi
 import controllers._
 import models.User
 import models.services.UserService
+import modules.SilhouetteModule.DefaultEnv
 import utils.CSRFHelper
 
 trait ControllerModule {
   def messagesApi: MessagesApi
-  def silhouetteEnvironment: Environment[User, CookieAuthenticator]
+  def silhouetteEnvironment: Environment[DefaultEnv]
   def socialProviderRegistry: SocialProviderRegistry
   def csrfHelper: CSRFHelper
   def userService: UserService
